@@ -3,15 +3,14 @@ package uaslp.ingenieria.labs.list;
 import static uaslp.ingenieria.labs.list.Position.AFTER;
 import static uaslp.ingenieria.labs.list.Position.BEFORE;
 
-public class LinkedList<G> implements List<G> {
+public class LinkedList<G> implements List<G>{
 
-
-    private static class Node<T> {
+    private static class Node<T>{
         private final T data;
         private Node<T> previous;
         private Node<T> next;
 
-        Node(T data) {
+        Node(T data){
             this.data = data;
         }
     }
@@ -23,10 +22,10 @@ public class LinkedList<G> implements List<G> {
     private static int listsCount = 0;
 
     public LinkedList() {
-        listsCount++;
+        listsCount ++;
     }
 
-    public static int getListsCount() {
+    public static int getListsCount(){
         return listsCount;
     }
 
@@ -37,18 +36,18 @@ public class LinkedList<G> implements List<G> {
             this.currentNode = head;
         }
 
-        public boolean hasNext() {
+        public boolean hasNext(){
             return currentNode != null;
         }
 
-        public G next() {
+        public G next(){
             G data = currentNode.data;
             currentNode = currentNode.next;
             return data;
         }
     }
 
-    public class ReverseIterator implements Iterator<G> {
+    public class ReverseIterator implements Iterator<G>{
 
         private Node<G> currentNode;
 
@@ -57,11 +56,11 @@ public class LinkedList<G> implements List<G> {
         }
 
 
-        public boolean hasNext() {
+        public boolean hasNext(){
             return currentNode != null;
         }
 
-        public G next() {
+        public G next(){
             G data = currentNode.data;
             currentNode = currentNode.previous;
             return data;
@@ -88,6 +87,9 @@ public class LinkedList<G> implements List<G> {
 
     @Override
     public G get(int index) {
+        if(index < 0 || index > size)
+            throw new MyIndexOutOfBoundsException();
+
         Node<G> currentNode = head;
         int currentIndex = 0;
 
@@ -105,7 +107,7 @@ public class LinkedList<G> implements List<G> {
         int currentIndex = 0;
 
         if (index < 0 || index >= size) {
-            return;
+            throw new MyIndexOutOfBoundsException();
         }
 
         size--;
